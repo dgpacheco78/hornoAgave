@@ -1,0 +1,272 @@
+[
+    {
+        "id": "304460c8c19a326d",
+        "type": "tab",
+        "label": "temperatura",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f1e93573cd5626af",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "6879d6117cb32d8e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 1",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 650,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f622248505d68b0f",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "function 1",
+        "func": "var temp1 = msg.payload.temp1;\nmsg.payload = temp1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "f1e93573cd5626af",
+                "54862012a6d5addd",
+                "57edb43e825b63db",
+                "9b3ce30ee61b2408"
+            ]
+        ]
+    },
+    {
+        "id": "54862012a6d5addd",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6d2b18adec06cb6d",
+        "type": "json",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "f622248505d68b0f"
+            ]
+        ]
+    },
+    {
+        "id": "adcd4f7de855c79e",
+        "type": "serial in",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "serial": "5acf00be4fa54238",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "6d2b18adec06cb6d"
+            ]
+        ]
+    },
+    {
+        "id": "a422a3ebb5a3fe1b",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "6879d6117cb32d8e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 2",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 650,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "57edb43e825b63db",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd0e9745500e183c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura Promedio",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 800,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9b3ce30ee61b2408",
+        "type": "ui_chart",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd0e9745500e183c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatura Actual",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 790,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c507afdc751b473",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "6879d6117cb32d8e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 3",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 650,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "6879d6117cb32d8e",
+        "type": "ui_group",
+        "name": "Sensores",
+        "tab": "ed3a2a35403485fc",
+        "order": 1,
+        "disp": true,
+        "width": 9,
+        "collapse": false
+    },
+    {
+        "id": "5acf00be4fa54238",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "dd0e9745500e183c",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "ed3a2a35403485fc",
+        "order": 2,
+        "disp": true,
+        "width": 9,
+        "collapse": false
+    },
+    {
+        "id": "ed3a2a35403485fc",
+        "type": "ui_tab",
+        "name": "Horno",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
