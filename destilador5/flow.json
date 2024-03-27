@@ -1,0 +1,36 @@
+[
+    {
+        "id": "d772b475bf7aee1e",
+        "type": "serial in",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "serial": "5acf00be4fa54238",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "6d2b18adec06cb6d",
+                "54862012a6d5addd"
+            ]
+        ]
+    },
+    {
+        "id": "5acf00be4fa54238",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]
