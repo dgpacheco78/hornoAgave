@@ -1,5 +1,609 @@
 [
     {
+        "id": "304460c8c19a326d",
+        "type": "tab",
+        "label": "temperatura",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f1e93573cd5626af",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "6879d6117cb32d8e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 1",
+        "label": "°",
+        "format": "{{value}}",
+        "min": "-100",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f622248505d68b0f",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "funTermo1",
+        "func": "var temp1 = msg.payload.temp1;\nglobal.set(\"tempG1\", temp1);\nmsg.payload = temp1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "f1e93573cd5626af"
+            ]
+        ]
+    },
+    {
+        "id": "54862012a6d5addd",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6d2b18adec06cb6d",
+        "type": "json",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 250,
+        "y": 100,
+        "wires": [
+            [
+                "f622248505d68b0f",
+                "9530d36a0d1ff73d",
+                "0a2ab2d451cc0cf1",
+                "e0a33d240941a608",
+                "69d41e4567dc9ae4"
+            ]
+        ]
+    },
+    {
+        "id": "a422a3ebb5a3fe1b",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "6879d6117cb32d8e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 2",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 610,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2af962f7e0d03d70",
+        "type": "exec",
+        "z": "304460c8c19a326d",
+        "command": "sudo shutdown -h now",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Apagar",
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c736663aca0b7df6",
+        "type": "ui_button",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd84010e0a19f5bc",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Apagar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "2af962f7e0d03d70"
+            ]
+        ]
+    },
+    {
+        "id": "fb4a64bcc158cf8e",
+        "type": "mysql",
+        "z": "304460c8c19a326d",
+        "mydb": "a844720c.608d6",
+        "name": "medVolta",
+        "x": 460,
+        "y": 660,
+        "wires": [
+            [
+                "24ceab3788efc0a3"
+            ]
+        ]
+    },
+    {
+        "id": "9530d36a0d1ff73d",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "funTermo2",
+        "func": "var temp2 = msg.payload.temp2;\nglobal.set(\"tempG2\", temp2);\nmsg.payload = temp2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "a422a3ebb5a3fe1b"
+            ]
+        ]
+    },
+    {
+        "id": "abe3bd06b8fc61f4",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "function 1",
+        "func": "var temp1 = global.get(\"tempG1\");\nvar temp2 = global.get(\"tempG2\");\nvar temp3 = global.get(\"tempG3\");\nvar temp4 = global.get(\"tempG4\");\nvar temp5 = global.get(\"tempG5\");\n\n// + temp1 + \"', CURRENT_DATE(), CURRENT_TIME(), 'composta', '\" + temp2 + \"');\";\n//\"INSERT INTO`mediciones`(`id`, `temp1`, `fecha`, `hora`, `muestra`, `temp2`) VALUES(NULL, '\" + temp1 + \"', CURRENT_DATE(), CURRENT_TIME(), 'composta', '\" + temp2 + \"');\";\nvar inse = \"INSERT INTO mediciones (id, temp1, temp2, temp3, temp4, temp5, fecha, hora, muestra) \";\nvar valu = \"VALUES (NULL, '\";\nvar vari = temp1 + \"', '\" + temp2 + \"', '\" + temp3 + \"', '\" + temp4 + \"', '\" + temp5 + \"', \";\nvar date = \"CURRENT_DATE(), CURRENT_TIME(), 'composta'); \";\nmsg.topic = inse + valu + vari + date;\nmsg.payload = inse + valu + vari + date;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 660,
+        "wires": [
+            [
+                "fb4a64bcc158cf8e",
+                "63becbbda6f97c16"
+            ]
+        ]
+    },
+    {
+        "id": "63becbbda6f97c16",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e4db35d6b4696dd9",
+        "type": "ui_text_input",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "label": "Hora de inicio",
+        "tooltip": "",
+        "group": "dd84010e0a19f5bc",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1120,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5162b57bb3d17d36",
+        "type": "ui_text_input",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "label": "Hora de fin",
+        "tooltip": "",
+        "group": "dd84010e0a19f5bc",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1130,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93dc808f856f1e78",
+        "type": "ui_button",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd84010e0a19f5bc",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Inicio",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1110,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67e2e5f570e5edd4",
+        "type": "ui_date_picker",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "label": "date",
+        "group": "dd84010e0a19f5bc",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1010,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24ceab3788efc0a3",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "038ffd52c057c068",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6f92a88c53a3ed30",
+        "type": "exec",
+        "z": "304460c8c19a326d",
+        "command": "python /home/pacheco/Desktop/hornoAgaveScript.py",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "script horno",
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [],
+            [
+                "038ffd52c057c068"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "af27ba603899a637",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd0e9745500e183c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 3",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 610,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0a2ab2d451cc0cf1",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "funTermo3",
+        "func": "var temp3 = msg.payload.temp3;\nglobal.set(\"tempG3\", temp3);\nmsg.payload = temp3;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "af27ba603899a637"
+            ]
+        ]
+    },
+    {
+        "id": "ebfc0004ed717e5a",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd0e9745500e183c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 4",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 610,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e0a33d240941a608",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "funTermo4",
+        "func": "var temp4 = msg.payload.temp4;\nglobal.set(\"tempG4\", temp4);\nmsg.payload = temp4;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "ebfc0004ed717e5a"
+            ]
+        ]
+    },
+    {
+        "id": "728568d582e0dc14",
+        "type": "ui_gauge",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "group": "dd84010e0a19f5bc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "termopar 5",
+        "label": "°",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 610,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "69d41e4567dc9ae4",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "funTermo5",
+        "func": "var temp5 = msg.payload.temp5;\nglobal.set(\"tempG5\", temp5);\nmsg.payload = temp5;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "728568d582e0dc14"
+            ]
+        ]
+    },
+    {
+        "id": "b05df95c4ba7f28a",
+        "type": "firebase-out",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "database": "d0e09018e72f7203",
+        "path": "sensor/tem",
+        "pathType": "str",
+        "priority": 1,
+        "queryType": "push",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "76bd5ff2804526aa",
+        "type": "inject",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 600,
+        "wires": [
+            [
+                "2d87817dede4379d",
+                "abe3bd06b8fc61f4"
+            ]
+        ]
+    },
+    {
+        "id": "2d87817dede4379d",
+        "type": "function",
+        "z": "304460c8c19a326d",
+        "name": "function 2",
+        "func": "var temp1 = global.get(\"tempG1\");\nvar temp2 = global.get(\"tempG2\");\nvar temp3 = global.get(\"tempG3\");\nvar temp4 = global.get(\"tempG4\");\nvar temp5 = global.get(\"tempG5\");\n\nconst event = new Date();\nvar hora = event.toLocaleTimeString('es-MX');\nvar fecha = event.toLocaleDateString('es-MX');\nvar ind1 = fecha.indexOf(\"/\");\nvar dia = fecha.substring(0, ind1);\nif (dia.length < 2) dia = \"0\" + dia;\nvar fechaN = fecha.substring(ind1 + 1);\nvar ind2 = fechaN.indexOf(\"/\");\nvar mes = fechaN.substring(0, ind2);\nif (mes.length < 2) mes = \"0\" + mes;\nvar anno = fechaN.substring(ind2 + 1);\nvar fechaF = anno + \"-\" + mes + \"-\" + dia;\n\n\n\nvar cadena = '{\"ref\":\"tepexi\",\" temp1\": ' + temp1 + ', \"temp2\": ' + temp2;\ncadena += ', \"temp3\": ' + temp3 + ', \"temp4\": ' + temp4 + ', \"temp5\": ' + temp5;\ncadena += ', \"fecha\": \"' + fechaF + '\", \"hora\": \"' + hora + '\" }';\nmsg.payload = cadena;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 600,
+        "wires": [
+            [
+                "a7f8c2ed222f42cc",
+                "657c1bbb8ec5dcc6"
+            ]
+        ]
+    },
+    {
+        "id": "657c1bbb8ec5dcc6",
+        "type": "debug",
+        "z": "304460c8c19a326d",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a7f8c2ed222f42cc",
+        "type": "json",
+        "z": "304460c8c19a326d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "b05df95c4ba7f28a"
+            ]
+        ]
+    },
+    {
         "id": "d772b475bf7aee1e",
         "type": "serial in",
         "z": "304460c8c19a326d",
@@ -13,6 +617,85 @@
                 "54862012a6d5addd"
             ]
         ]
+    },
+    {
+        "id": "92242763955da109",
+        "type": "ui_spacer",
+        "z": "304460c8c19a326d",
+        "name": "spacer",
+        "group": "6879d6117cb32d8e",
+        "order": 2,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "94dcb255f3fc17ed",
+        "type": "ui_spacer",
+        "z": "304460c8c19a326d",
+        "name": "spacer",
+        "group": "dd0e9745500e183c",
+        "order": 2,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "615a1fb941072406",
+        "type": "ui_spacer",
+        "z": "304460c8c19a326d",
+        "name": "spacer",
+        "group": "dd84010e0a19f5bc",
+        "order": 2,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "6879d6117cb32d8e",
+        "type": "ui_group",
+        "name": "Sensores",
+        "tab": "ed3a2a35403485fc",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "dd84010e0a19f5bc",
+        "type": "ui_group",
+        "name": "Controles",
+        "tab": "ed3a2a35403485fc",
+        "order": 3,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "a844720c.608d6",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "localhost",
+        "port": "3306",
+        "db": "medVolta",
+        "tz": "",
+        "charset": ""
+    },
+    {
+        "id": "dd0e9745500e183c",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "ed3a2a35403485fc",
+        "order": 2,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "d0e09018e72f7203",
+        "type": "database-config",
+        "name": "My Database",
+        "authType": "anonymous",
+        "claims": {},
+        "createUser": false,
+        "useClaims": false
     },
     {
         "id": "5acf00be4fa54238",
@@ -32,5 +715,13 @@
         "out": "char",
         "addchar": "",
         "responsetimeout": "10000"
+    },
+    {
+        "id": "ed3a2a35403485fc",
+        "type": "ui_tab",
+        "name": "Horno",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
     }
 ]
