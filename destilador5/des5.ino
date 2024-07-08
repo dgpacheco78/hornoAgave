@@ -3,11 +3,11 @@
 #include <max6675.h>
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
-MAX6675 thermo1(28, 26, 24);
-MAX6675 thermo2(34, 32, 30);
-MAX6675 thermo3(40, 38, 36);
-MAX6675 thermo4(46, 44, 42);
-MAX6675 thermo5(52, 50, 48);
+MAX6675 thermo1(26, 24, 22);
+MAX6675 thermo2(32, 30, 28);
+MAX6675 thermo3(38, 36, 34);
+MAX6675 thermo4(44, 42, 40);
+MAX6675 thermo5(50, 48, 46);
 
 float temp1, temp2, temp3, temp4, temp5;
 const int analogInPin = A0;
@@ -18,28 +18,28 @@ void setup() {
   Serial.begin(9600); 
   lcd.begin(16, 2);
   lcd.setCursor(0, 0);
-  lcd.print("Sensores");
+  lcd.print("SENSORES");
   lcd.setCursor(0, 1);
-  lcd.print("Termopares");
+  lcd.print("DESTILACIÓN");
   delay(2000);
 }
 
 void loop() {
   //temp1 = thermo1.readCelsius();
-  //temp2 = thermo2.readCelsius();
-  //temp3 = thermo3.readCelsius();
-  //temp4 = thermo4.readCelsius();
-  //temp5 = thermo5.readCelsius();
+  temp1 = thermo2.readCelsius();
+  temp2 = thermo3.readCelsius();
+  temp3 = thermo4.readCelsius();
+  temp4 = thermo5.readCelsius();
   
-  temp1 = random(10, 80);
-  temp2 = random(10, 80);
-  temp3 = random(10, 80);
-  temp4 = random(10, 80);
-  temp5 = random(10, 80);
+  //temp1 = random(10, 80);
+  //temp2 = random(10, 80);
+  //temp3 = random(10, 80);
+  //temp4 = random(10, 80);
+  //temp5 = random(10, 80);
 
   json = "{\"temp1\":" + String(temp1) + ", \"temp2\":" + String(temp2) + ", "
-         "\"temp3\":" + String(temp3) + ", \"temp4\":" + String(temp4) + ", "
-         "\"temp5\":" + String(temp5) +"}";
+         "\"temp3\":" + String(temp3) + ", \"temp4\":" + String(temp4) + "} ";
+         //"\"temp5\":" + String(temp5) +"}";
   Serial.println(json);
   
   lcd.setCursor(0, 0);
@@ -54,10 +54,10 @@ void loop() {
   lcd.print("Tem4 = " + String(temp4));
   delay(2000);
   lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Tem5 = " + String(temp5));
-  delay(2000);
-  lcd.clear();
+  //lcd.setCursor(0, 0);
+  //lcd.print("Tem5 = " + String(temp5));
+  //delay(2000);
+  //lcd.clear();
   
   /*
    sensorValue = analogRead(analogInPin);
