@@ -3,9 +3,9 @@
 #include <Wire.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "UTIM";
-const char* password = "utim$$$2026";
-const char* mqtt_server = "172.16.133.22";
+const char* ssid = "Mega_2.4G_45B0";
+const char* password = "KNZS3kAR";
+const char* mqtt_server = "187.157.153.158";
 
 
 String mensajeControl = "";
@@ -36,7 +36,7 @@ void setup() {
   pinMode(pin4, OUTPUT);
 
   setup_wifi();
-  client.setServer(mqtt_server, 80);
+  client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 }
 
@@ -98,7 +98,13 @@ void loop() {
   }
   client.loop();
 
-  String data = "{\"temp0\": " + String(termo0.readCelsius()) + ", \"temp1\": " + String(termo1.readCelsius()) + "}";
+  long termo00 = random(2500, 3001); //
+  float termo0F = termo00 / 100.0;
+
+  long termo11 = random(2500, 3001); //
+  float termo1F = termo11 / 100.0;
+
+  String data = "{\"temp0\": " + String(termo0F) + ", \"temp1\": " + String(termo1F) + "}";
   data.trim();
   Serial.println(data);
   client.publish("agave/horno", data.c_str());
@@ -106,6 +112,5 @@ void loop() {
   // For the MAX6675 to update, you must delay AT LEAST 250ms between reads!
   digitalWrite(pin2, HIGH);
   delay(3000);
-  digitalWrite(pin2, LOW);
-  
+  digitalWrite(pin2, LOW); 
 }
